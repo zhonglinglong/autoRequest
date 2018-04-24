@@ -21,7 +21,16 @@ discover = unittest.defaultTestLoader.discover(test_dir,pattern="*TestCase.py")
 if __name__ == "__main__":
     base.host_set("mock")
     contractRequest.get_cookie()
-    #
+   
+
+    now = time.strftime("%Y-%m-%d %H_%M_%S")
+    filename = test_dir + '/' + now + "result.html"
+    fp = open(filename,"wb")
+    runner = HTMLTestRunner(stream=fp,title=u"业绩接口自动化测试报告",description="用例执行情况：",tester="zhonglinglong")
+    runner.run(discover)
+    fp.close()
+	
+	 #
     # contract_nums = []
     # for i in range(4):
     #     contract_num = base.random_name()
@@ -79,11 +88,4 @@ if __name__ == "__main__":
     #               HouseContractLossAchievementEndCalculateTestCase_trst_house_contract_loss_p=contract_nums[2])
 
     # houseDevelopRequest.add_house_delelop("业绩测试预发专用楼盘", 1000)
-
-    now = time.strftime("%Y-%m-%d %H_%M_%S")
-    filename = test_dir + '/' + now + "result.html"
-    fp = open(filename,"wb")
-    runner = HTMLTestRunner(stream=fp,title=u"业绩接口自动化测试报告",description="用例执行情况：",tester="zhonglinglong")
-    runner.run(discover)
-    fp.close()
 
