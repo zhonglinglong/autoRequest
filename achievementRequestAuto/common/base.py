@@ -18,13 +18,12 @@ import smtplib,datetime,random
 import logging
 import time
 
-log_name = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 logger = logging.getLogger('mylogger')
 logger.setLevel(logging.DEBUG)
 path = os.path.dirname(
     os.path.join(
         os.path.split(
-            os.path.realpath(__file__))[0])) + '\\autotest%s.log' % str(log_name)
+            os.path.realpath(__file__))[0])) + '\\autotest.log'
 fileHandler = logging.FileHandler(path)
 consoleHandler = logging.StreamHandler()
 formatter = logging.Formatter('%(asctime)s - %(process)s - %(levelname)s : %(message)s')
