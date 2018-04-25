@@ -41,7 +41,7 @@ while value:
         #发完邮件之后，删除日志及自动化报告
         os.remove("D:\\PythonProject\\autoRequest\\achievementRequestAuto\\" + "autotest.log")
         os.remove(filename)
-        
+
         #执行完成用例之后构造下一次测试需要的数据
         contract_nums = []
         for i in range(4):
