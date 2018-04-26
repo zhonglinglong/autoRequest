@@ -8,12 +8,12 @@ author = crazyzhong
 
 import unittest,time
 from HTMLTestRunnerCN import HTMLTestRunner
-from common import base
 from erpRequest import contractRequest
 from erpRequest import houseDevelopRequest
 from erpRequest import decorationRequest
 from erpRequest import apartmentRequest
 from time import sleep
+from common import base
 import os
 
 test_dir = "./"
@@ -26,6 +26,8 @@ contractRequest.get_cookie()
 value = True
 while value:
     if str(time.strftime("%H-%M-%S")) == "19-08-00":
+        #重新生成一次日志文件
+        from common import base
         now = time.strftime("%Y-%m-%d %H_%M_%S")
         filename = test_dir + '/' + now + "result.html"
         fp = open(filename,"wb")
@@ -35,12 +37,13 @@ while value:
 
         path = []
         path.append(filename)
-        path.append("D:\\PythonProject\\autoRequest\\achievementRequestAuto\\" + "autotest.log" )
+        path.append("D:\\PythonProject\\autoRequest\\achievementRequestAuto\\" + "%autotest.log" % time.strftime("%Y-%m-%d") )
         base.send_email(path)
 
         #发完邮件之后，删除日志及自动化报告
-        os.remove("D:\\PythonProject\\autoRequest\\achievementRequestAuto\\" + "autotest.log")
         os.remove(filename)
+        os.remove("D:\\PythonProject\\autoRequest\\achievementRequestAuto\\" + "%autotest.log" % time.strftime("%Y-%m-%d") )
+
 
         #执行完成用例之后构造下一次测试需要的数据
         contract_nums = []
