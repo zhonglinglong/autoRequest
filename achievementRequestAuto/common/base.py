@@ -18,12 +18,13 @@ import smtplib,datetime,random
 import logging
 import time
 
+log_name = time.strftime("%Y-%m-%d")
 logger = logging.getLogger('mylogger')
 logger.setLevel(logging.DEBUG)
 path = os.path.dirname(
     os.path.join(
         os.path.split(
-            os.path.realpath(__file__))[0])) + '\\autotest.log'
+            os.path.realpath(__file__))[0])) + '\\%autotest.log' % log_name
 fileHandler = logging.FileHandler(path)
 consoleHandler = logging.StreamHandler()
 formatter = logging.Formatter('%(asctime)s - %(process)s - %(levelname)s : %(message)s')
@@ -120,10 +121,7 @@ def set_conf(section, **value):
             config.set(section, k, v)
     config.write(open(path, 'w'))
 
-def get_count(sql):
-    """返回查询数量"""
-    count = sqlCursor.execute(sql)
-    return count
+
 
 def get_xlrd(xls_name,xls_sheet,value=False):
     """
